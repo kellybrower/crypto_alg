@@ -12,13 +12,17 @@ def xgcd(a, b):
     return b, x0, y0
 
 def minv(m1, m2):
+	"""returns m1 inverse and m2 inverse modulo m1"""
 	ig,u,v = xgcd(m1, m2)
 	m1inv = u
 	m2inv = v % m1
 	return m1inv, m2inv
 	
 
-def china(a1, a2, m1, m2):
+def chinese_rem(a1, a2, m1, m2):
+	"""The chinese remainder algorithm for two equivalences:
+	returns x such that x is a solution to a1 = x mod m1 and a2 = x mod m2
+	"""
 	m1inv, m2inv  = minv(m1, m2)
 	x = ((a1*(m2inv)*m2) + (a2*(m1inv)*m1)) % (m1*m2)
 	return x
